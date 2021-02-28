@@ -25,12 +25,12 @@ public class ProblemC {
             count++;
             long current=trampolines[i];
             trampolines[i]--;
-            int j=i;
-            while (current+j<trampolines.length){
-                j= (int)(current + j);
+            int j= (int) (i+current);
+            while (j<trampolines.length){
                 current=trampolines[j];
                 if (trampolines[j]!=1)
                     trampolines[j]--;
+                j= (int)(current + j);
             }
         }
         return count;
