@@ -16,7 +16,7 @@ public class ProblemC {
     }
 
     private static long solve(long[] trampolines) {
-        int count=0;
+        long count=0;
         for (int i=0;i<trampolines.length;){
             if (trampolines[i]==1){
                 i++;
