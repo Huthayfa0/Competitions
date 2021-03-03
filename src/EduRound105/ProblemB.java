@@ -8,7 +8,7 @@ public class ProblemB {
         int t=Integer.parseInt(scan.nextLine());
         while (t-->0){
             int n= scan.nextInt(),U=scan.nextInt(),R=scan.nextInt(),D=scan.nextInt(),L=scan.nextInt();
-            if (n==2&&(U==2&&R==))
+            if (n==2&&(U==2&&R==0))
             if (U==R&&R==L&&L==D)
                 System.out.println("YES");
 
