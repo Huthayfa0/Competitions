@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class ProblemC {
     public static void main(String[] args) {
+        /*
+        This solution works but consumes time
+        in order to solve this in O(n) instead of O(n^2)
+        you can change each step effect to it derivative using signals equations
+        for help enter : https://codeforces.com/contest/1491/submission/108749687
+         */
         Scanner scan=new Scanner(System.in);
         int T= scan.nextInt();
         while (T-->0){
