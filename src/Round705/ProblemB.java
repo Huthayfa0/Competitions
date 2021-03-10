@@ -28,6 +28,7 @@ public class ProblemB {
                 break;
             }
         }
+        int b=time[0];
         for (int i=0;i<arr.length;i++){
             if (arr[i]>=h||i== arr.length-1){
                 time[0]=0;
@@ -38,6 +39,6 @@ public class ProblemB {
                 break;
             }
         }
-
+        if (b!=time[0]) time[1]=0;
     }
 }
