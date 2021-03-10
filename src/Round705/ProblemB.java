@@ -8,6 +8,7 @@ public class ProblemB {
     public static void main(String[] args) {
         Scanner scan=new Scanner(System.in);
         int t= scan.nextInt();
+
         while (t-->0){
             int h= scan.nextInt(),m= scan.nextInt();
             int[] time = Arrays.stream(scan.next().split(":")).mapToInt(Integer::parseInt).toArray();
