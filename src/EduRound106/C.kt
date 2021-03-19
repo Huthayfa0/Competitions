@@ -6,16 +6,22 @@ fun main(){
     repeat(t){
         val n= readLine()!!.toInt()
         val arr= readLine()!!.split(" ").map { it.toLong() }
-        val ups=LongArray((n+1)/2)
+        val ups=LongArray(n/2)
         val rights=LongArray(n/2)
         for (i in 0 until n/2 ){
             ups[i]=arr[i*2]
             rights[i]=arr[i*2+1]
         }
-        if (n%2==1) ups[n/2]=arr[n-1]
+
         val upMin=min(ups)
         val upRight=min(rights)
-
+        var sum=0L
+        for (i in 0..upMin.second){
+            sum+=ups[i]
+        }
+        for (i in 0..upRight.second){
+            //sum+=rightsre[i]
+        }
     }
 }
 
