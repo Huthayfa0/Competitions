@@ -1,5 +1,6 @@
 package KotlaCode;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class D {
@@ -10,14 +11,28 @@ public class D {
             int n= scan.nextInt();
             long k= scan.nextLong();
             long[] arr=new long[n];
+            long[] indices=new long[n];
             for (int i=0;i<n;i++){
                 arr[i]= scan.nextLong();
+                indices[i]= arr[i];
             }
+            Arrays.sort(arr);
+
             for (int i=0;i<n;i++){
-                int count=0;
-                for (long x :arr)
-                    if (Math.abs(arr[i]-x)<=k)
-                        count++;
+                int count=1;
+                int l=Arrays.binarySearch(arr,indices[i]);
+                int a=l-1;
+                int b=l+1;
+                while (a>=0) {
+                    if (arr[l] - arr[a] >k) break;
+                    a--;
+                    count++;
+                }
+                while (b<n) {
+                    if (arr[b] - arr[l] >k) break;
+                    b++;
+                    count++;
+                }
                 System.out.print(count+" ");
             }
             System.out.println();

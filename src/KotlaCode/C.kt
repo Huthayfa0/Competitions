@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
         val (n,a)= readLine()!!.split(' ').map { it.toLong() }
         //println(n-n%a)
        var b=a
-        var min=Long.MAX_VALUE;
+        var min=Long.MAX_VALUE
         for (i in n downTo  a){
             val l=gcdThing(i,a)
             if (a*i/l>a*b/min){
