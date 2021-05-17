@@ -1,4 +1,4 @@
-package aprilFools2021
+package CodeForces.aprilFools2021
 
 import java.util.*
 

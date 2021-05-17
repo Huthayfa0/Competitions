@@ -1,8 +1,4 @@
-package aprilFools2021
-
-import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.sqrt
+package CodeForces.aprilFools2021
 
 fun main() {
     var x= readLine()!!.toInt()
