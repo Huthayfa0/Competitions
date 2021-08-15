@@ -40,8 +40,11 @@ private fun kruskal() {
 
     val rank1 = IntArray(size)
     val parent1 = IntArray(size)
+    val rank2 = IntArray(size)
+    val parent2 = IntArray(size)
     for (i in 1 until size) {
         parent1[i] = i
+        parent2[i] = i
     }
     repeat(m1){
         val (u,v)=readlnInts()
@@ -49,9 +52,9 @@ private fun kruskal() {
     }
     repeat(m2){
         val (u,v)=readlnInts()
-        unionSets(u,v,rank1,parent1)
+        unionSets(u,v,rank2,parent2)
     }
-    val set= ((parent1.toSet())).toMutableSet()
+    val set= (parent2.toSet().union(parent1.toSet())).toMutableSet()
     set.remove(0)
 
     val cost= mutableListOf<String>()
@@ -62,8 +65,9 @@ private fun kruskal() {
         val it=set.iterator()
         while (it.hasNext()){
             val y=it.next()
-            if (check(x,y,parent1)&&check(x,y,parent1)){
+            if (check(x,y,parent1)&&check(x,y,parent2)){
                 assert (unionSets(x,y,rank1,parent1))
+                assert (unionSets(x,y,rank2,parent2))
                 cost.add("$x $y")
                 m.add(y)
             }

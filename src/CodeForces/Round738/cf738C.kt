@@ -6,15 +6,25 @@ fun main() {
     repeat(t){
         val n=readlnInt()
         val arr=readIntArray()
-        if (arr[n-1]==0) {
-            val str = StringBuilder("1")
-            for (i in 2..(n + 1)) str.append(" $i")
-            println(str.toString())
-        }else{
-            val str = StringBuilder("4")
-            for (i in n downTo 1) str.append(" $i")
-            println(str.toString())
-        }
+       if(arr[0]==0) {
+           val str = StringBuilder("1")
+           var x=true
+           for (i in 2..n) {
+               if (x&&arr[i-1]==1) {
+                   str.append(" ${n + 1}")
+                   x=false
+               }
+               str.append(" $i")
+           }
+           if (x)
+               str.append(" ${n+1}")
+           println(str.toString())
+       }else {
+           val str = StringBuilder("${n+1}")
+           for (i in 1..n) str.append(" $i")
+           println(str.toString())
+       }
+
     }
 }
 

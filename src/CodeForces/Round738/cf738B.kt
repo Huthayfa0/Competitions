@@ -26,10 +26,11 @@ fun main() {
             }
             //count=0
         }else if (count>0) {
-            val cA = x[n-count-1]
-            val cB = if (x[n-count-1] == 'B') 'R' else 'B'
+            val i=n-count-1
+            val cA = x[i]
+            val cB = if (x[i] == 'B') 'R' else 'B'
             while (count > 0) {
-                x[n - count] = if (count % 2 == 0) cA else cB
+                x[i+count] = if (count % 2 == 0) cA else cB
                 count--
             }
         }
