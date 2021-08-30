@@ -1,55 +1,26 @@
 import java.io.File
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 import kotlin.math.*
 
 fun main() {
-
-    val f=Scanner(File("src/facebookHackerCup/2021/consistency_chapter_2_input.txt"))
-    val o=File("src/facebookHackerCup/2021/outputB.txt").printWriter()
+    val f=Scanner(File("src/facebookHackerCup/2021/gold_mine_chapter_1_sample_input.txt"))
+    val o= File("src/facebookHackerCup/2021/outputD.txt").printWriter()
     val t=f.nextLine().toInt()
-    repeat(t){count->
-        val graph=Array(28){i->IntArray(28){j->if (i==j)0 else Int.MAX_VALUE} }
-        val str=f.nextLine()
+    repeat(t){ith->
         val n=f.nextLine().toInt()
-        //val pairs= mutableMapOf<Char,MutableSet<Char>>()
-        repeat(n){
-            val ss=f.nextLine()
-            graph[ss[0]-'A'][ss[1]-'A']=1
+        val values=f.nextLine().split(" ").map { it.toInt() }
+        val tunels=List(n){ mutableListOf<Int>()}
+        repeat(n-1){
+            val (a,b)=f.nextLine().split(" ").map { it.toInt() -1}
+            tunels[a].add(b)
+            tunels[b].add(a)
         }
-        val x=str.groupingBy { it }.eachCount()
-        floydWarshall(graph)
-        if (x.keys.size<=1) {
-            println("Case #${count + 1}: ${0}")
-            o.println("Case #${count + 1}: ${0}")
-        }
-        else{
-            var found=false
-            var ans=Int.MAX_VALUE
-            for (a in 'A'..'Z'){
-                var bool=true
-                var sum=0
-                for (b in x){
-                    if (graph[b.key-'A'][a-'A']==Int.MAX_VALUE){
-                        bool=false
-                        break
-                    }
-                    sum+=graph[b.key-'A'][a-'A']*b.value
-                }
-                if (bool){
-                    found=true
-                    ans= min(sum,ans)
-                }
-            }
-            println("Case #${count+1}: ${if (found) ans else -1}")
-            o.println("Case #${count+1}: ${if (found) ans else -1}")
-        }
+        val ans=dijkstra(n,values,tunels)!!
+        o.println("Case #${ith+1}: $ans")
+        println("Case #${ith+1}: $ans")
     }
     o.close()
 }
-
-
 
 //Scanner code
 private fun readln() = readLine()!!
@@ -179,48 +150,49 @@ private fun bfs(size: Int, adjacencyList: List<List<Int>>, v: Int = 0) {
 */
 
 //Shoretest Path
-/*
-private fun dijkstra(size: Int, adjacencyList: List<List<List<Int>>>, startingVertex: Int = 0) {
-    val cost = DoubleArray(size) { Double.POSITIVE_INFINITY }
-    cost[startingVertex] = 0.0 // Cost of source is 0
+
+private fun dijkstra(size: Int,values:List<Int>, adjacencyList: List<MutableList<Int>>, startingVertex: Int = 0): Int? {
+    val cost = IntArray(size) { 0 }
+    cost[startingVertex] =values[startingVertex]  // Cost of source is 0
     val parent = IntArray(size) // Parent of a vertex
     parent[startingVertex] = -1 // startingVertex is the root
     val processed = BooleanArray(size)
-    val t = PriorityQueue<Pair<Double, Int>>(Comparator.comparing { it.first })
+    val t = PriorityQueue<Pair<Int, Int>>(Comparator.comparing { -it.first })
     val list = ArrayList<Int>()
-    t.add(Pair(0.0, startingVertex))
+    t.add(Pair(0, startingVertex))
     while (!t.isEmpty()) {
-        val a = t.poll().second
+        val (x,a) = t.poll()
         if (processed[a]) continue
         processed[a] = true
         list.add(a)
         for (u in adjacencyList[a]) {
-            val b = u[1]
-            val w = u[2]
-            if (cost[a] + w < cost[b]) {
+            val b = u
+            val w = values[b]
+            if (cost[a] + w > cost[b]) {
                 parent[b] = a
                 cost[b] = cost[a] + w
                 t.add(Pair(cost[b], b))
             }
         }
     }
+    return cost.max()
 }
-*/
-private fun floydWarshall(distance: Array<IntArray>){
 
+private fun floydWarshall(adjacencyMatrix: Array<DoubleArray>): Array<DoubleArray> {
+
+    val distance = adjacencyMatrix
     val size = distance.size
     for (k in 0 until size) {
         for (i in 0 until size) {
             for (j in 0 until size) {
-                if (distance[i][k]==Int.MAX_VALUE||distance[k][j]==Int.MAX_VALUE)
-                    continue
-                distance[i][j] =min(distance[i][j], distance[i][k] + distance[k][j])
+                distance[i][j] = java.lang.Double.min(distance[i][j], distance[i][k] + distance[k][j])
             }
         }
     }
 
+    return distance
 }
-/*
+
 private fun bellmanFord(graph: Array<IntArray>, V: Int, E: Int, src: Int) {
     // Initialize distance of all vertices as infinite.
     val dis = IntArray(V) { Int.MAX_VALUE }
@@ -252,7 +224,7 @@ private fun bellmanFord(graph: Array<IntArray>, V: Int, E: Int, src: Int) {
     }
 
 }
-*/
+
 
 //MST
 /*

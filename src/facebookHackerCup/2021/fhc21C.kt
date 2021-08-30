@@ -1,9 +1,71 @@
+import java.io.File
 import java.util.*
 import kotlin.math.*
 
 fun main() {
+    val f=Scanner(File("src/facebookHackerCup/2021/xs_and_os_input.txt"))
+    val o= File("src/facebookHackerCup/2021/outputC.txt").printWriter()
+    /*fun win(grid:Array<CharArray>):Boolean{
+        for (x in grid){
+            if (x.all { it=='X' })
+                return true
+        }
+        for (i in grid.indices){
+            var win=true
+            for (j in grid){
+                if (j[i]!='X') {
+                    win=false
+                    break
+                }
+            }
+            if (win)
+                return true
+        }
+        return false
+    }*/
+    val t=f.nextLine().toInt()
+    repeat(t){ith->
+        val n=f.nextLine().toInt()
+        val str=Array(n){f.nextLine().toCharArray()}
+        var count=str.groupingBy { if (it.contains('O')) -1 else it.count { it=='.' } }.eachCount()
+        val ss=str.rotate()
+        count=ss.groupingBy { if (it.contains('O')) -1 else it.count { it=='.' } }.eachCountTo(count.toMutableMap())
+        if (count[1]!=null){
+            for (i in str){
+                if (i.count { it!='X' }!=1)
+                    continue
+                val j=i.indexOf('.')
+                if (j==-1)continue
+                if (ss[j].count { it!='X' }==1)
+                    count[1]=count[1]!!-1
+            }
 
+        }
+        /*val pairs= mutableListOf<Pair<Int,Int>>()
+        for (i in str.indices)
+            for (j in str.indices)
+                if (str[i][j]=='.')
+                    pairs.add(Pair(i,j))
+        for (c in 1..pairs.size){
+            var count=0
+
+        }*/
+
+        if (count.all { it.key==-1 }) {
+            o.println("Case #${ith + 1}: Impossible")
+            println("Case #${ith + 1}: Impossible")
+        }else{
+            count=count- setOf(-1)
+            val ans=count.keys.min()
+            o.println("Case #${ith + 1}: $ans ${count[ans]}")
+            println("Case #${ith + 1}: $ans ${count[ans]}")
+        }
+    }
+    o.close()
 }
+
+fun Array<CharArray>.rotate()= Array(this[0].size){i->CharArray(this.size){j->this[j][i]}    }
+
 
 //Scanner code
 private fun readln() = readLine()!!
