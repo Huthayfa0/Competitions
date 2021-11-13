@@ -22,31 +22,23 @@ typedef vector<VL> ML;
 //KruskalMST PrimeCheck Factorization NumberPower Matrix
 class Solution {
 public:
-    static bool cmp(vector<int> x,vector<int> y){
-        return x[1]>y[1];
-    }
     vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
-        sort(items.begin(),items.end(),cmp);
-        unsigned int n=queries.size();
-        vector<int> ans(n);
-        vector<vector<int>> que(n,vector<int>(2));
-        for (int i = 0; i < n; ++i) {
-            que[i][0]=i;
-            que[i][1]=queries[i];
+        map<int,int> dp;
+        for (auto x:items) {
+            dp[x[0]]= max(dp[x[0]],x[1]);
         }
-        int m=items.size();
-        sort(que.begin(),que.end(), cmp);
-        int c=0;
-        for (int i = 0; i <n; ++i) {
-            int x=que[i][1];
-            while (c<m){
-                if(items[c][0]<=x){
-                    break;
-                }
-                c++;
-            }
-            if(c==m)break;
-            ans[que[i][0]]=items[c][1];
+        auto ite=dp.begin();
+        while (ite!=dp.end()){
+            auto tt=ite;
+            ite++;
+            (*ite).second= max((*ite).second,(*(tt)).second);
+        }
+        int m=queries.size();
+        vector<int> ans(m);
+        for (int i = 0; i < m; ++i) {
+            auto x= dp.lower_bound(queries[i]);
+            if((*x).first!=queries[i]&&x!=dp.begin())x--;
+             ans[i]=(*x).first<=queries[i]?(*x).second:0;
         }
         return ans;
     }
