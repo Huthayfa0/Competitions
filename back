@@ -1,0 +1,2 @@
+mv '/home/huthayfa/CLionProjects/UnderHeat/main.cpp' '/home/huthayfa/CLionProjects/UnderHeat/pre.cpp' 
+cp 'src/'$1'/'$2'/'$3'.cpp' '/home/huthayfa/CLionProjects/UnderHeat/main.cpp'
