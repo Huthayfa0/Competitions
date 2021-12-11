@@ -21,31 +21,22 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //DepthFirstSearch BreadthFirstSearch DijkstraShortestPath
 //FloydWarshallShortestPath BellmanFordShortestPath PrimMST
 //KruskalMST PrimeCheck Factorization NumberPower Matrix
-void print(ll n){
-    while (n>=15){
-        cout<<177737771;
-        n-=15;
-    }
-    while(n>0){
-        cout<<731;
-        n--;
-    }
 
-}
 void solve(){
     ll n;
     cin>>n;
-    print(n);
+    cout<<2;
+    lp(i,3,n+2)
+        cout<<" "<<i;
     cout<<endl;
 }
 
 int main(){
     FAST
     ll t;
-    t=1;
+    cin>>t;
     while(t--){
        solve();
     }
-    //lp(i,1,100000)cout<<7*i<<endl;
     return 0;
 }
