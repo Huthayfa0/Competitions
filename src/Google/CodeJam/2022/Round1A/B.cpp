@@ -78,7 +78,7 @@ void solve(){
     ll x=1;
     while(sum>0){
         if(sum&1)
-        ans.push_back(x);
+            ans.push_back(x);
         x<<=1;
         sum>>=1;
     }
