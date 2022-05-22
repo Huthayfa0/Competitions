@@ -40,7 +40,22 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //LinesGeometry CirclesGeometry
 
 void solve(){
-
+    ll n;string x;
+    cin>>n>>x;
+    bool u=false,l=false,d=false,s=false;
+    for (auto c:x) {
+        u|=c>='A'&&c<='Z';
+        l|=c>='a'&&c<='z';
+        d|=c>='0'&&c<='9';
+        s|= c=='#'||c=='@'||c=='*'||c=='&';
+    }
+    cout<<x;
+    if(!u)cout<<'A';
+    if(!l)cout<<'a';
+    if(!d)cout<<'1';
+    if(!s)cout<<'#';
+    while(n+!u+!l+!d+!s<=6)n++,cout<<'1';
+    cout<<endl;
 }
 
 int main(){
