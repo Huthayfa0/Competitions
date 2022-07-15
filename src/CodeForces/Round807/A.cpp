@@ -40,13 +40,21 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //LinesGeometry CirclesGeometry BigInteger
 
 void solve(){
-    
+    ll n,x;cin>>n>>x;VL arr(2*n);re(i,arr);
+    sort(all(arr));
+    bool ans=true;
+    lp(i,0,n){
+        if(arr[i]+x>arr[n+i]){
+            ans=false;
+        }
+    }
+    cout<<(ans?"Yes":"No")<<endl;
 }
 
 int main(){
     FAST
     ll t=1;
-    //cin>>t;
+    cin>>t;
     //ll nn=t;
 
     while(t--){
