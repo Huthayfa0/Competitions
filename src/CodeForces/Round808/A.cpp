@@ -42,14 +42,21 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //()
 
 void solve(){
-   ll n;cin>>n;VL arr(n);re(i,arr);
-   lp(i,1,n){
-       if(arr[i]%arr[0]!=0){
-           cout<<"No"<<endl;
-           return;
+   ll n,l,r;cin>>n>>l>>r;
+   VL ans(n);
+   bool found=true;
+   lp(i,0,n){
+       if((l%(i+1))+l>r){
+           found=false;break;
        }
+       ans[i]=(l%(i+1))+l;
    }
-   cout<<"Yes"<<endl;
+   if(found){
+       cout<<"Yes"<<endl;
+       out(i,ans);
+   }else{
+       cout<<"No"<<endl;
+   }
 }
 
 int main(){
