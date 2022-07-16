@@ -39,28 +39,17 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //KruskalMST PrimeCheck Factorization NumberPower
 //DivisionInverse Combinations Geometry
 //LinesGeometry CirclesGeometry BigInteger
+//()
 
 void solve(){
-    ll n;cin>>n;
-    string s,f;cin>>s>>f;
-    if(s[0]!=f[0]||s[n-1]!=f[n-1]){
-        cout<<-1<<endl;
-        return;
-    }
-    VL ss,ff;
-    lp(i,0,n-1){
-        if(s[i]^s[i+1])ss.pb(i);
-        if(f[i]^f[i+1])ff.pb(i);
-    }
-    if(sz(ss)!=sz(ff)){
-        cout<<-1<<endl;
-        return;
-    }
-    ll ans=0;
-    lp(i,0,sz(ss)){
-        ans+=abs(ss[i]-ff[i]);
-    }
-    cout<<ans<<endl;
+   ll n;cin>>n;VL arr(n);re(i,arr);
+   lp(i,1,n){
+       if(arr[i]%arr[0]!=0){
+           cout<<"No"<<endl;
+           return;
+       }
+   }
+   cout<<"Yes"<<endl;
 }
 
 int main(){
