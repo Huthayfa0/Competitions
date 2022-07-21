@@ -40,40 +40,18 @@ void chmax(ll&a,ll b){if(a<b)a=b;}
 //DivisionInverse Combinations Geometry
 //LinesGeometry CirclesGeometry BigInteger
 //()
-ll best(ll b,ll x,ll q){
-    return x+ min(b,q);
-}
-void solve(){
-   ll n,q;cin>>n>>q;
-   VL arr(n);
-   re(i,arr);
-   map<ll,ll> m;
-   ordered_set st;
-   lp(i,0,n){
-       st.insert(mp(arr[i],m[arr[i]]++));
-   }
-   string ans(n,'0');
-   lp(i,0,n){
-       if(q>=n-i){
-           ans[i]='1';
-           q--;
-           continue;
-       }
-       st.erase(mp(arr[i],m[arr[i]]-1));
-       m[arr[i]]--;
-       if(arr[i]>q){
-           ll a=st.order_of_key(mp(q,m[q]));
-           ll b=st.order_of_key(mp(q-1,m[q-1]));
-           if(a<b+1){
-               ans[i]='1';
-               q--;
-           }
-       }else{
-           ans[i]='1';
-       }
 
-   }
-   cout<<ans<<endl;
+void solve(){
+    ll n,m;cin>>n>>m;VL arr(n);re(i,arr);
+    string str(m,'B');
+    lp(i,0,n){
+        ll x=min(m+1-arr[i],arr[i]);
+        if(str[x-1]=='A'){
+            str[m-x]='A';
+        }else
+            str[x-1]='A';
+    }
+    cout<<str<<endl;
 }
 
 int main(){
